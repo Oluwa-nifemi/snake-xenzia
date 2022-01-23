@@ -3,8 +3,7 @@ import './Stlyles/SnakeXenzia.css';
 import Snake from './Components/Snake';
 import Fruit from './Fruit';
 
-
-const fruitCordinate = () => {
+const generateRandomFruit = () => {
   let x = Math.floor(Math.random() * 21);
   let y = Math.floor(Math.random() * 21);
 
@@ -18,7 +17,7 @@ class App extends Component {
     score: 0,
     speed: 700,
     snakePosition: [[0, 0], [0, 1], [0,2]],
-    snakeFruit: fruitCordinate(),
+    snakeFruit: generateRandomFruit(),
     direction: 'right'
 
   }
@@ -128,7 +127,7 @@ class App extends Component {
           <div className='container'>
             <div className='snake-field'>
               <Snake snakePosition={this.state.snakePosition}/>
-              {/*<Fruit fruit={this.state.snakeFruit}/>*/}
+              <Fruit position={this.state.snakeFruit}/>
             </div>
           </div>
         </main>
