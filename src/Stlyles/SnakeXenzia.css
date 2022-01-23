@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -29,6 +33,14 @@ body {
   -webkit-box-shadow: 4px 4px 16px 4px rgba(0, 0, 0, 0.99);
           box-shadow: 4px 4px 16px 4px rgba(0, 0, 0, 0.99);
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-gap: 4px;
+}
+
+.snake-body.head{
+  background: cornflowerblue;
 }
 
 .snake-head {
@@ -45,14 +57,14 @@ body {
 }
 
 .snake-body {
-  position: absolute;
-  top: 0;
-  left: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
   background: rgba(0, 0, 0, 0.9);
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  border: 1px solid rgba(204, 25, 25, 0.99);
+  border: 2px solid rgba(255, 130, 130, 0.99);
 }
 
 .egg {
