@@ -3,8 +3,19 @@ import './Stlyles/SnakeXenzia.css';
 import Snake from './Components/Snake';
 import Fruit from './Fruit';
 
+//Wrap function that wraps value around range min - max if val provided is less than min then max is return and if val provided is greater than max then min is returned
+const wrap = (min, max, val) => {
+  if(val < min){
+    return max
+  }else if(val > max){
+    return min
+  }
 
-export const getRandomNumber = (min, max) => {
+  return val
+}
+
+//Generate random integer
+const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
@@ -57,6 +68,9 @@ class App extends Component {
   move(){
     this.setState(state => {
       const newPosition = this.getNewPosition(state.snakePosition, state.direction);
+
+      newPosition[0] = wrap(0, 9, newPosition[0])
+      newPosition[1] = wrap(0, 9, newPosition[1])
 
       if(newPosition[0] > 9 ||
         newPosition[0] < 0 ||
