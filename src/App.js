@@ -19,24 +19,32 @@ const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-const generateRandomFruit = () => {
+const generateRandomFruit = (map) => {
   let x = getRandomNumber(0, 10);
   let y = getRandomNumber(0, 10);
+
+  //Ensure that generated fruit position does not already exist as snake node
+  while(map[`${x},${y}`]){
+    x = getRandomNumber(0, 10);
+    y = getRandomNumber(0, 10);
+  }
 
   return ([x, y])
 }
 
 
+const initialMap = {
+  '0,0': true,
+  '0,1': true,
+  '0,2': true,
+}
+
 const initialState = {
   score: 0,
   speed: 400,
   snakePosition: [[0, 0], [0, 1], [0,2]],
-  snakePositionMap: {
-    '0,0': true,
-    '0,1': true,
-    '0,2': true,
-  },
-  snakeFruit: generateRandomFruit(),
+  snakePositionMap: initialMap,
+  snakeFruit: generateRandomFruit(initialMap),
   direction: 'right'
 
 }
@@ -99,7 +107,7 @@ class App extends Component {
           ...state,
           snakePosition: [...state.snakePosition, newPosition],
           snakePositionMap: newPositionMap,
-          snakeFruit: generateRandomFruit() //Generate new position for snake
+          snakeFruit: generateRandomFruit(newPositionMap) //Generate new position for snake
         }
       }
 
