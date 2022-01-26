@@ -3,9 +3,14 @@ import './Stlyles/SnakeXenzia.css';
 import Snake from './Components/Snake';
 import Fruit from './Fruit';
 
+
+export const getRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
 const generateRandomFruit = () => {
-  let x = Math.floor(Math.random() * 21);
-  let y = Math.floor(Math.random() * 21);
+  let x = getRandomNumber(0, 10);
+  let y = getRandomNumber(0, 10);
 
   return ([x, y])
 }
@@ -53,6 +58,16 @@ class App extends Component {
       ){
         //New node is invalid
         return state;
+      }
+
+      //Check if head matches the snake position
+      if(newPosition[0] === this.state.snakeFruit[0] && newPosition[1] === this.state.snakeFruit[1]){
+        //If head matches snake position then do not remove tail
+        return {
+          ...state,
+          snakePosition: [...state.snakePosition, newPosition],
+          snakeFruit: generateRandomFruit() //Generate new position for snake
+        }
       }
 
       return {
